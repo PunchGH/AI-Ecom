@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/* Design tokens. Values here are the Ops·Dark defaults — the only palette
+   active before the theme script runs (e.g. with JS disabled), so they must
+   exactly match the [data-theme="ops"][data-mode="dark"] block below. */
+@theme {
+  --color-base: #0d1117;
+  --color-panel: #161b22;
+  --color-panel2: #1c232c;
+  --color-line: #2a323c;
+  --color-ink: #e6edf3;
+  --color-muted: #8b97a5;
+  --color-accent: #14b8a6;
+  --color-accent-soft: #14b8a626;
+  --color-up: #22c55e;
+  --color-down: #ef4444;
+  --color-amber: #f59e0b;
+  --color-sky: #38bdf8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), sans-serif;
+}
+
+:root {
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+html,
+body {
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.5s ease both;
+}
+
+/* ============================================================
+   Theme × mode palettes. Every block below is unlayered CSS, so
+   it always wins over Tailwind's @layer theme/@layer utilities
+   regardless of selector order — redefining the same custom
+   property names re-themes every `bg-panel`/`text-ink`/etc.
+   utility class app-wide with zero JSX changes.
+   ============================================================ */
+
+/* Ops — practical, clean; blue/teal accent */
+[data-theme="ops"][data-mode="dark"] {
+  --color-base: #0d1117;
+  --color-panel: #161b22;
+  --color-panel2: #1c232c;
+  --color-line: #2a323c;
+  --color-ink: #e6edf3;
+  --color-muted: #8b97a5;
+  --color-accent: #14b8a6;
+  --color-accent-soft: #14b8a626;
+  --color-up: #22c55e;
+  --color-down: #ef4444;
+  --color-amber: #f59e0b;
+  --color-sky: #38bdf8;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+[data-theme="ops"][data-mode="light"] {
+  --color-base: #f7f9fb;
+  --color-panel: #ffffff;
+  --color-panel2: #eef2f5;
+  --color-line: #d7dee4;
+  --color-ink: #0f172a;
+  --color-muted: #5b6b7a;
+  --color-accent: #0d9488;
+  --color-accent-soft: #0d948826;
+  --color-up: #16a34a;
+  --color-down: #dc2626;
+  --color-amber: #d97706;
+  --color-sky: #0284c7;
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+/* Executive — premium, luxury, clean; gold accents */
+[data-theme="executive"][data-mode="dark"] {
+  --color-base: #14110a;
+  --color-panel: #1e1a10;
+  --color-panel2: #262013;
+  --color-line: #4a3c1f;
+  --color-ink: #f5efe0;
+  --color-muted: #a89972;
+  --color-accent: #d1a954;
+  --color-accent-soft: #d1a95426;
+  --color-up: #3f8f6a;
+  --color-down: #a23b3b;
+  --color-amber: #c98a3e;
+  --color-sky: #6b8caf;
+  --shadow-card: 0 8px 30px -10px rgba(209, 169, 84, 0.35);
+}
+[data-theme="executive"][data-mode="light"] {
+  --color-base: #faf6ec;
+  --color-panel: #ffffff;
+  --color-panel2: #f3ecd8;
+  --color-line: #d9c68f;
+  --color-ink: #241d0f;
+  --color-muted: #8a7a52;
+  --color-accent: #b8892b;
+  --color-accent-soft: #b8892b26;
+  --color-up: #2f7a52;
+  --color-down: #8a2f2f;
+  --color-amber: #a8701f;
+  --color-sky: #4f6f8f;
+  --shadow-card: 0 8px 24px -12px rgba(184, 137, 43, 0.28);
+}
+
+/* Stealth — terminal feel; charcoal background; mint/cyan accents */
+[data-theme="stealth"][data-mode="dark"] {
+  --color-base: #0a0c0b;
+  --color-panel: #121513;
+  --color-panel2: #171b19;
+  --color-line: #232928;
+  --color-ink: #d7f5ea;
+  --color-muted: #6f8a7f;
+  --color-accent: #34e2b0;
+  --color-accent-soft: #34e2b026;
+  --color-up: #5eead4;
+  --color-down: #ff5470;
+  --color-amber: #f5c451;
+  --color-sky: #22d3ee;
+  --shadow-card: 0 0 24px -4px rgba(52, 226, 176, 0.35);
+}
+[data-theme="stealth"][data-mode="light"] {
+  --color-base: #f2f7f5;
+  --color-panel: #ffffff;
+  --color-panel2: #e7f1ed;
+  --color-line: #bcd9cd;
+  --color-ink: #0e1613;
+  --color-muted: #5f7d73;
+  --color-accent: #0f9d75;
+  --color-accent-soft: #0f9d7526;
+  --color-up: #0f9d75;
+  --color-down: #d1435b;
+  --color-amber: #b9822e;
+  --color-sky: #0891b2;
+  --shadow-card: 0 0 16px -6px rgba(15, 157, 117, 0.25);
+}
+
+/* Fonts swap by theme only, not by light/dark mode */
+[data-theme="executive"] {
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), sans-serif;
+}
+[data-theme="stealth"] {
+  --font-sans: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-display: var(--font-jetbrains-mono), monospace;
+}
+
+/* Shared card treatment — border-radius stays rounded-2xl everywhere;
+   only the shadow differs per theme (gold glow / neutral / mint glow). */
+.card {
+  box-shadow: var(--shadow-card);
+}
+
+/* Stealth's signature ambient grid + glow — Executive/Ops stay flat & clean. */
+[data-theme="stealth"] body {
+  background-image:
+    radial-gradient(
+      120% 80% at 85% -10%,
+      color-mix(in srgb, var(--color-accent) 16%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 100% 100%, 46px 46px, 46px 46px;
+  background-position: 0 0, -1px -1px, -1px -1px;
+  background-attachment: fixed;
+}
+[data-theme="stealth"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, var(--color-base) 82%);
+  pointer-events: none;
+  z-index: -1;
+}
